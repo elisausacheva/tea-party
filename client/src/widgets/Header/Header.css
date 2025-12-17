@@ -1,0 +1,59 @@
+/* Контейнер навигации — равномерное распределение кнопок */
+.header-nav {
+    display: flex;
+    justify-content: space-between; /* равномерно распределяем кнопки */
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    gap: 10px; /* небольшой отступ между кнопками */
+  }
+  
+  /* Стили для кнопок */
+  .btn {
+    background-color: #333; /* темно-серый */
+    color: white;
+    border: 1px solid #555;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    flex: 1; /* чтобы кнопки были одинаковой ширины */
+    max-width: 160px;
+    text-align: center;
+  }
+  
+  /* Второстепенная кнопка — светло-серая */
+  .btn-secondary {
+    background-color: #777;
+    border-color: #999;
+    color: #eee;
+  }
+  
+  /* Ховер эффект для кнопок */
+  .btn:hover {
+    background-color: #000;
+    border-color: #222;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #555;
+    border-color: #777;
+  }
+  
+  /* Ссылки NavLink без подчеркивания */
+  .auth-link {
+    text-decoration: none;
+  }
+  
+  /* Активный NavLink */
+  .auth-link_active button {
+    background-color: #007bff;
+    border-color: #0056b3;
+    color: white;
+  }
+  

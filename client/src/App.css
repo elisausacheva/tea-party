@@ -1,0 +1,40 @@
+/* Контейнер для кнопок — равномерное распределение */
+.button-group {
+  display: flex;
+  justify-content: space-between; /* равномерный отступ между кнопками */
+  gap: 50px; /* небольшой промежуток между кнопками */
+  max-width: 400px; /* по ширине формы */
+  margin: 0 auto; /* центрирование */
+}
+
+/* Классические стили для кнопок — черная и серая */
+button {
+  background-color: #333; /* темно-серый / почти черный */
+  border: 1px solid #555; /* серый бордер */
+  color: white; /* белый текст */
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  flex: 1; /* чтобы кнопки были одинаковой ширины */
+  text-align: center;
+}
+
+/* Отдельный класс для серой кнопки (например, второстепенная) */
+button.secondary {
+  background-color: #777; /* средне-серый */
+  border-color: #999;
+  color: #eee;
+}
+
+/* Ховер эффект для кнопок */
+button:hover {
+  background-color: #000; /* черный при наведении */
+  border-color: #222;
+}
+
+button.secondary:hover {
+  background-color: #555;
+  border-color: #777;
+}

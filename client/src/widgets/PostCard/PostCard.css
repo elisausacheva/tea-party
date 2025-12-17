@@ -1,0 +1,69 @@
+.postpage-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Центрируем форму и сообщение об ошибке */
+  .postpage-container > form,
+  .error-message {
+    max-width: 400px;
+    margin: 0 auto 20px;
+  }
+  
+  /* Ошибка */
+  .error-message {
+    color: #d9534f;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Таблица постов */
+  .posts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #222;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .posts-table thead {
+    background-color: #333;
+    color: white;
+  }
+  
+  .posts-table th,
+  .posts-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .posts-table tbody tr:hover {
+    background-color: #eee;
+  }
+  
+  /* Кнопка удалить */
+  .btn-delete {
+    background-color: #555; /* темно-серый */
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .btn-delete:hover {
+    background-color: #000; /* черный */
+  }
+  
