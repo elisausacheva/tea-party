@@ -10,6 +10,7 @@ indexRouter.use("/posts", postRouter);
 indexRouter.use("/auth", authRouter);
 indexRouter.use("/users", userRouter);
 indexRouter.use('/comments', commentsRouter);
+indexRouter.use('/teas', teaRouter);
 
 indexRouter.use((req, res) => {
   res.status(404).json(formatResponse(404, "НЕ НАЙДЕН123"));
