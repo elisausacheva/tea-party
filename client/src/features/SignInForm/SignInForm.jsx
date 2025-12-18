@@ -25,7 +25,10 @@ export default function SignInForm({ setUser }) {
       const response = await UserApi.login(inputs);
       console.log(response);
 
-      if (response.error) return alert(response.error);
+      if (response.error) {
+        alert(response.message || response.error);
+        return;
+      }
 
       if (response.statusCode === 200) {
         console.log(response.data.accessToken, response.data.accessToken);
@@ -34,10 +37,13 @@ export default function SignInForm({ setUser }) {
 
         setInputs(INITIAL_INPUTS_DATA);
         navigate("/posts");
+      } else {
+        alert(response.message || "Произошла ошибка при входе");
       }
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      const errorMessage = error.response?.data?.message || error.message || "Произошла ошибка при входе";
+      alert(errorMessage);
     }
   };
 

@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use((config) => {
   if (!config.headers.authorization && accessToken) {
     // console.log("axiosInstance.interceptors.request accessToken", accessToken);
 
-    config.headers.authorization = `Bearer, ${accessToken}`;
+    config.headers.authorization = `Bearer ${accessToken}`;
   }
   return config;
 });
@@ -30,16 +30,17 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const prevRequest = error.config;
-    if (error.response.status === 403 && !prevRequest.sent) {
-      const response = await axiosInstance.get("/refresh");
-      setAccessToken(response.data.accessToken);
-      // console.log(
-      //   "axiosInstance.interceptors.response response.data.accessToken",
-      //   response.data.accessToken
-      // );
-      prevRequest.sent = true;
-      prevRequest.headers.authorization = `Bearer, ${accessToken}`;
-      return axiosInstance(prevRequest);
+    if (error.response?.status === 403 && !prevRequest.sent) {
+      try {
+        const response = await axiosInstance.get("/auth/refresh");
+        const newAccessToken = response.data.data.accessToken;
+        setAccessToken(newAccessToken);
+        prevRequest.sent = true;
+        prevRequest.headers.authorization = `Bearer ${newAccessToken}`;
+        return axiosInstance(prevRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
     }
     return Promise.reject(error);
   }
