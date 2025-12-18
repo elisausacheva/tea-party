@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-const  formatResponse  = require("../utils/formatResponse");
+const formatResponse = require("../utils/formatResponse");
 
 const { ACCESS_TOKEN_SECRET } = process.env;
 
 const verifyAccessToken = (req, res, next) => {
   // console.log("==================", req.headers.authorization);
- 
+
   try {
     // * из заголовков по ключу authorization получаем строку `Bearer, ${accessToken}`
     // * сплитим её и достаё второй элемент

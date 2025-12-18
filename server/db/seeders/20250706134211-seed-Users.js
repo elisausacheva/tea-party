@@ -1,31 +1,26 @@
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
     await queryInterface.bulkInsert("Users", [
       {
-        name: "Vova",
-        email: "v@example.com",
-        password: "hashedpassword1", // предположим, пароль уже хеширован
+        name: "admin",
+        email: "admin@mail.ru",
+        password: "$2b$10$CxBGtj8yXNqc6tjxkpjQFewd9FRr8cfbvZFs1wuAl331t4J7hIdPW", // пароль уже хеширован
+        isAdmin: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        name: "Sanya",
-        email: "s@example.com",
-        password: "hashedpassword2",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        name: "Artur",
-        email: "a@example.com",
-        password: "hashedpassword2",
+       {
+        name: "Test",
+        email: "test@mail.ru",
+        password: "Qwerty123!", // предположим, пароль уже хеширован
+        isAdmin: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     ]);
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.bulkDelete("Users", null, {});
   },
 };

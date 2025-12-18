@@ -5,15 +5,15 @@ class UserController {
     static async getAllUsers() {
         const users = await User.findAll()
         console.log("=====Service======", users);
-        const result = users.map((el) => el.get({ plain: true }))
-        return result
+        // const result = users.map((el) => el.get({ plain: true }))
+        return users
     }
 
     static async getOneUser(id){
         const user = await User.findByPk(id)
         console.log("=====Service111======", user); 
-        const result = user.get({ plain: true }) 
-        return result    
+        // const result = user.get({ plain: true }) 
+        return user    
     }
     
     static async registerUser({name, email, password}) {
@@ -22,8 +22,8 @@ class UserController {
         email,
         password,
         });
-        const result = user.get({ plain: true })
-        return result
+        // const result = user.get({ plain: true })
+        return user
     }
 
     static async getByEmail(email) {
@@ -31,8 +31,8 @@ class UserController {
         if (!user) {
             return null
         } else {
-            const result = user.get({ plain: true })
-            return result
+            // const result = user.get({ plain: true })
+            return user
         }
 
     }

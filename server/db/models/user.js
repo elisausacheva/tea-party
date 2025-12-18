@@ -3,11 +3,19 @@ const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(models) {
-      this.hasMany(models.Post, { foreignKey: "authorId" });
-      // У одного user'а может быть много постов
+    static associate({ Tea }) {
+      this.hasMany(Tea, { foreignKey: "userID" });
+      // У одного user'а может быть много
       // за это отвечает "hasMany"
     }
+
+    toJSON() {
+    const values = { ...this.get() };
+    delete values.password;
+    delete values.createdAt;
+    delete values.updatedAt;
+    return values;
+  }
   }
 
   User.init(
@@ -15,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      isAdmin: DataTypes.BOOLEAN,
     },
     {
       sequelize,
