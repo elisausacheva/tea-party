@@ -42,7 +42,7 @@ class TeaService {
     const tea = await Tea.findByPk(id);
 
     if (tea) {
-      if (tea.authorId !== userID) {
+      if (tea.userID !== userID) {
         throw new Error("Hельзя удалить чужой");
       }
       await tea.destroy();
