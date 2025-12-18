@@ -70,7 +70,7 @@ class TeaController {
       res
         .status(200)
         .json(
-          formatResponse(200, "Комментарий одного пользователя", result, null)
+          formatResponse(200, "Чаи одного пользователя", result, null)
         );
     } catch (error) {
       console.log(error);
