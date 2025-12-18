@@ -1,7 +1,7 @@
 const TeaService = require("../services/TeaService");
 const formatResponse = require("../utils/formatResponse");
 const isInvalidId = require("../utils/isInvalidId");
-const TeaValidator = require("../utils/PostValidator");
+const TeaValidator = require("../utils/TeaValidator");
 
 class TeaController {
   static async getTeas(req, res) {
@@ -49,7 +49,7 @@ class TeaController {
         location,
         img,
         desc,
-        userID: user.id,
+        userID: userID,
       });
       console.log("NEWTEA");
 
@@ -141,7 +141,7 @@ class TeaController {
       return res.status(400).json(formatResponse(400, "Не валидный ID"));
     }
     try {
-      const tea = await PostService.delete(id, user.id);
+      const tea = await TeaService.delete(id, user.id);
       //console.log("ВЫШЛИ ИЗ ДЕЛИТ");
 
       if (!tea) {

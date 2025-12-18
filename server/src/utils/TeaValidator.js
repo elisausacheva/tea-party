@@ -1,10 +1,10 @@
 class TeaValidator {
   static validate(tea) {
-    const { title, desc, img } = tea;
-    if (!title || typeof title !== "string" || title.trim() === "") {
+    const { name, desc } = tea;
+    if (!name || typeof name !== "string" || name.trim() === "") {
       return {
         isValid: false,
-        error: "Title must be string",
+        error: "Name must be string",
       };
     }
     if (!desc || typeof desc !== "string" || desc.trim() === "") {
