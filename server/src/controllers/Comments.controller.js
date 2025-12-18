@@ -5,12 +5,12 @@ const { Comment } = require('../../db/models/comment');
 class CommentController {
     static async getComments(req, res) {
         try {
-            const { teaId } = req.query; // Получаем teaId из query параметров
-            if (!teaId) {
+            const { teaID } = req.params; // Получаем teaId из query параметров
+            if (!teaID) {
                 return res.status(400).json(formatResponse(400, "Не указан teaId"));
             }
             
-            const comments = await CommentService.getAllComments(teaId); // Передаем teaId
+            const comments = await CommentService.getAllComments(teaID); // Передаем teaID
             
             if (comments.length === 0) {
                 return res.json(formatResponse(200, "Комментариев нет"));
@@ -31,7 +31,7 @@ class CommentController {
                 return res.status(400).json(formatResponse(400, "Заполни данные"));
             }
             
-            const { text, teaId } = req.body; // teaId, а не teaID.id
+            const { text, teaID } = req.body; // teaId, а не teaID.id
             
             // Валидация через модель Comment (если есть метод validate)
             if (Comment.validate) {
@@ -45,7 +45,7 @@ class CommentController {
             const newComment = await CommentService.createComment({
                 text,
                 userId: user.id,
-                teaId // Просто teaId из req.body
+                teaID // Просто teaId из req.body
             });
             
             return res.status(201).json(formatResponse(201, "Комментарий создан", newComment));

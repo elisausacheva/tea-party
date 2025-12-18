@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Получаем комментарии по teaId через query параметр
 // GET /comment?teaId=123
-router.get("/", CommentsController.getComments);
+router.get("/:teaID", CommentsController.getComments);
 
 // Создаем комментарий с teaId в теле запроса
 // POST /comment

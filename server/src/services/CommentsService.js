@@ -1,13 +1,13 @@
-const { Comment } = require('../../db/models/comment');
+const { Comment } = require('../../db/models');
 
 class CommentService { // Правильное название
     /**
      * Получить все комментарии по teaID
      * @param {string} teaId - ID чая
      */
-    static async getAllComments(teaId) { // Добавляем параметр
+    static async getAllComments(teaID) { // Добавляем параметр
         return Comment.findAll({
-            where: { teaId }, // Добавляем where условие
+            where: { teaID }, // Добавляем where условие
             order: [['createdAt', 'DESC']] // Добавляем сортировку
         });
     }
