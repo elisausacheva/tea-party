@@ -4,7 +4,7 @@ module.exports = {
       {
         name: "admin",
         email: "admin@mail.ru",
-        password: "Qwerty123!", // предположим, пароль уже хеширован
+        password: "$2b$10$CxBGtj8yXNqc6tjxkpjQFewd9FRr8cfbvZFs1wuAl331t4J7hIdPW", // пароль уже хеширован
         isAdmin: true,
         createdAt: new Date(),
         updatedAt: new Date(),
