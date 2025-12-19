@@ -8,13 +8,13 @@ import { setAccessToken } from "./shared/lib/axiosInstance";
 import SignInForm from "./features/SignInForm/SignInForm";
 import PostPage from "./pages/PostPage/PostPage";
 import AlleTest from "./pages/AllUsers/AlleTest";
-import OnePostPage from "./pages/OnePostPage/OnePostPage";
-import MyPost from './pages/AllUsers/MyPost'
+import OneTeaPage from "./pages/OneTeaPage/OneTeaPage";
+import MyPost from "./pages/AllUsers/MyPost";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const [user, setUser] = useState({});
- 
-  
+
   useEffect(() => {
     console.log("Зашли в useEffect");
     const getUser = async () => {
@@ -37,11 +37,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout user={user} setUser={setUser} />}>
+          <Route path="/alletest" element={<AlleTest />} />
           <Route
-            path="/alletest"
-            element={<AlleTest  />}
+            path="/onetea/:id"
+            element={<OneTeaPage setUser={setUser} />}
           />
-          <Route path="/onepost/:id" element={<OnePostPage setUser={setUser} />} />
           <Route path="/post" element={<MyPost user={user} />} />
           <Route path="/register" element={<SignUpForm setUser={setUser} />} />
           <Route path="/login" element={<SignInForm setUser={setUser} />} />

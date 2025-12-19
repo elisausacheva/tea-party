@@ -1,16 +1,15 @@
 import React from "react";
 
 import { useState } from "react";
-import { PostApi } from "../../entities/post/PostApi";
+import { TeaApi } from "../../entities/post/TeaApi";
 
 export default function PostForm({ onCreate, userId }) {
   const [inputs, setInputs] = useState({
-    // id: 0,
-    title: "",
+    sort: "",
+    name: "",
+    location: "",
     img: "",
     desc: "",
-    like: "",
-    // authorId: 0,
   });
 
   const inputsHandler = (e) => {
@@ -22,55 +21,62 @@ export default function PostForm({ onCreate, userId }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (!inputs.title.trim().length === 0 || !inputs.desc.trim().length === 0) {
+    if (!inputs.name.trim().length === 0 || !inputs.desc.trim().length === 0) {
       return;
     }
-    const { statusCode, error, data } = await PostApi.create(inputs);
+    const { statusCode, error, data } = await TeaApi.create(inputs);
     console.log("data", data);
     if (error) return;
     if (statusCode === 201) {
-      onCreate({ ...inputs, id: data?.id, authorId: userId });
+      onCreate({ ...inputs, id: data?.id, userID: userId });
       console.log("ONCREATE", inputs);
 
-      setInputs({ title: "", img: "", desc: "", like: "" });
+      setInputs({ sort: "", name: "", location: "", img: "", desc: "" });
     }
   };
 
   return (
     <form onSubmit={submitHandler}>
       <input
-        name="title"
+        name="sort"
         type="text"
         required
-        placeholder="Увековечь себя в истории"
-        value={inputs.title}
+        placeholder="Сорт чая"
+        value={inputs.sort}
+        onChange={inputsHandler}
+      />
+      <input
+        name="name"
+        type="text"
+        required
+        placeholder="Название чая"
+        value={inputs.name}
+        onChange={inputsHandler}
+      />
+      <input
+        name="location"
+        type="text"
+        required
+        placeholder="Местоположение"
+        value={inputs.location}
         onChange={inputsHandler}
       />
       <input
         name="img"
         type="url"
         required
-        placeholder="Закинь фоточку"
+        placeholder="Ссылка на изображение"
         value={inputs.img}
         onChange={inputsHandler}
       />
-      <input
+      <textarea
         name="desc"
-        type="text"
         required
-        placeholder="Напиши красиво"
+        placeholder="Описание чая"
         value={inputs.desc}
         onChange={inputsHandler}
       />
-      <input
-        name="like"
-        type="text"
-        required
-        placeholder="Накрути себе лайков"
-        value={inputs.like}
-        onChange={inputsHandler}
-      />
-      <button type="submit">Создать</button>
+      <button type="submit">Создать чай</button>
     </form>
   );
 }
