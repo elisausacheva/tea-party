@@ -41,7 +41,7 @@ function App() {
             path="/alletest"
             element={<AlleTest  />}
           />
-          <Route path="/onepost/:id" element={<OnePostPage setUser={setUser} />} />
+          <Route path="/onepost/:id" element={<OnePostPage setUser={setUser} user={user}/>} />
           <Route path="/post" element={<MyPost user={user} />} />
           <Route path="/register" element={<SignUpForm setUser={setUser} />} />
           <Route path="/login" element={<SignInForm setUser={setUser} />} />

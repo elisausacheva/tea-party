@@ -1,4 +1,4 @@
-const { Comment } = require('../../db/models');
+const { Comment, User } = require('../../db/models');
 
 class CommentService { // Правильное название
     /**
@@ -8,7 +8,13 @@ class CommentService { // Правильное название
     static async getAllComments(teaID) { // Добавляем параметр
         return Comment.findAll({
             where: { teaID }, // Добавляем where условие
-            order: [['createdAt', 'DESC']] // Добавляем сортировку
+            order: [['createdAt', 'ASC']], // Добавляем сортировку
+            include: [ // Подтягиваем данные автора
+                {
+                    model: User,
+                    attributes: ['id', 'name', 'email']
+                }
+            ]
         });
     }
     
