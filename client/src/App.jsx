@@ -19,6 +19,7 @@ import "leaflet/dist/leaflet.css";
 function App() {
   const [user, setUser] = useState({});
 
+
   useEffect(() => {
     console.log("Зашли в useEffect");
     const getUser = async () => {
@@ -51,8 +52,10 @@ function App() {
           <Route
             path="/onetea/:id"
             element={<OneTeaPage setUser={setUser} />}
+            path="/onetea/:id"
+            element={<OneTeaPage setUser={setUser} />}
           />
-          <Route path="/onepost/:id" element={<OnePostPage setUser={setUser} />} />
+          <Route path="/onepost/:id" element={<OnePostPage setUser={setUser} user={user}/>} />
           <Route path="/post" element={<MyPost user={user} />} />
           <Route path="/register" element={<SignUpForm setUser={setUser} />} />
           <Route path="/login" element={<SignInForm setUser={setUser} />} />
