@@ -1,15 +1,22 @@
-import React from 'react'
-import { PostApi } from '../../entities/post/PostApi'
-import { useState } from 'react';
+import React from "react";
+import { TeaApi } from "../../entities/tea/TeaApi";
+import { useState } from "react";
 
-export default function PostFormUpdate({id, setShowForm, onUpdate, user, data}) {
-const [inputs, setInputs] = useState({
-  title: data.title,
-  img: data.img,
-  desc: data.desc,
-  like: data.like,
-});
-// console.log("34343443+++++++++>>>>INPUTS", inputs);
+export default function PostFormUpdate({
+  id,
+  setShowForm,
+  onUpdate,
+  user,
+  data,
+}) {
+  const [inputs, setInputs] = useState({
+    sort: data.sort,
+    name: data.name,
+    location: data.location,
+    img: data.img,
+    desc: data.desc,
+  });
+  // console.log("34343443+++++++++>>>>INPUTS", inputs);
   const inputsHandler = (e) => {
     setInputs((currentInputs) => ({
       ...currentInputs,
@@ -21,58 +28,56 @@ const [inputs, setInputs] = useState({
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    // if (inputs.title.trim().length === 0 || inputs.img.trim().length === 0 ||
-    //   inputs.title.trim().length === 0 || inputs.like.trim().length === 0) {
+    // if (inputs.sort.trim().length === 0 || inputs.name.trim().length === 0 ||
+    //   inputs.location.trim().length === 0 || inputs.img.trim().length === 0) {
     //   return;
     // }
-    const { statusCode, error, data } = await PostApi.update(id, inputs);
+    const { statusCode, error, data } = await TeaApi.update(id, inputs);
     if (error) return;
     if (statusCode === 200) {
-      onUpdate({ ...inputs, id: data?.id, authorId: user.id });
+      onUpdate({ ...inputs, id: data?.id, userID: user.id });
       console.log("ONCREATE", inputs);
 
-      setInputs({ title: "", img: "", desc: "", like: "" });
+      setInputs({ sort: "", name: "", location: "", img: "", desc: "" });
     }
     console.log(12345678);
-    
-    setShowForm(false)
+
+    setShowForm(false);
   };
 
   return (
     <form onSubmit={submitHandler}>
       <input
-        name="title"
-        type="text"
-        // required
-        placeholder="Щебетун"
-        value={inputs.title}
+        name="sort"
+        value={inputs.sort}
         onChange={inputsHandler}
+        placeholder="Сорт чая"
+      />
+      <input
+        name="name"
+        value={inputs.name}
+        onChange={inputsHandler}
+        placeholder="Название чая"
+      />
+      <input
+        name="location"
+        value={inputs.location}
+        onChange={inputsHandler}
+        placeholder="Местоположение"
       />
       <input
         name="img"
-        type="text"
-        // required
-        placeholder="Ваше фото"
         value={inputs.img}
         onChange={inputsHandler}
+        placeholder="Ссылка на изображение"
       />
-      <input
+      <textarea
         name="desc"
-        type="text"
-        // required
-        placeholder="Напиши красиво"
         value={inputs.desc}
         onChange={inputsHandler}
+        placeholder="Описание"
       />
-      <input
-        name="like"
-        type="text"
-        // required
-        placeholder="Поклонники"
-        value={inputs.like}
-        onChange={inputsHandler}
-      />
-      <button type="submit">Сохранить</button>
+      <button type="submit">Обновить чай</button>
     </form>
   );
 }

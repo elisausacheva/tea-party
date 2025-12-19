@@ -22,11 +22,7 @@ const verifyRefreshToken = (req, res, next) => {
       .status(401)
       .clearCookie("refreshTokenWhales")
       .json(
-        formatResponse({
-          statusCode: 401,
-          message: "Неверный рефреш токен",
-          error: error.message,
-        })
+        formatResponse(401, "Неверный рефреш токен", null, error.message)
       );
   }
 };
