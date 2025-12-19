@@ -44,7 +44,7 @@ export default function SignUpForm({ setUser }) {
         setAccessToken(data.accessToken);
         setUser(data.user);
         setInputs(INITIAL_INPUTS_DATA);
-        navigate("/teas");
+        navigate("/");
       }
     } catch (error) {
       // console.log("+==++++======++=", error);
