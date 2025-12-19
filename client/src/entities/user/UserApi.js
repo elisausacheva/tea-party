@@ -36,7 +36,7 @@ export class UserApi {
   }
 
   static async refresh() {
-    const { data } = await axiosInstance.get("auth/refresh");
+    const { data } = await axiosInstance.get("/auth/refresh");
     return data;
   }
 }

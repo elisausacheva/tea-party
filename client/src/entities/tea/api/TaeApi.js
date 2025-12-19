@@ -1,6 +1,6 @@
-import { axiosInstance } from "../../shared/lib/axiosInstance";
+import { axiosInstance } from "../../../shared/lib/axiosInstance";
 
-export class TeaApi {
+export default class TeaApi {
   static async getAll() {
     const { data } = await axiosInstance.get("/teas");
     return data;

@@ -36,7 +36,7 @@ export default function SignInForm({ setUser }) {
         setAccessToken(response.data.accessToken);
 
         setInputs(INITIAL_INPUTS_DATA);
-        navigate("/posts");
+        navigate("/teas");
       } else {
         alert(response.message || "Произошла ошибка при входе");
       }

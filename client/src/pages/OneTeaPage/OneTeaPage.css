@@ -1,0 +1,215 @@
+/* OneTeaPage.css */
+
+.one-tea-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* Загрузка */
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #333;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Ошибка */
+.error-container {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  color: #c53030;
+}
+
+.error-container h2 {
+  margin-bottom: 15px;
+}
+
+/* Карточка чая */
+.tea-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  margin-top: 20px;
+}
+
+.tea-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+.tea-title {
+  font-size: 2.2rem;
+  color: #2d3748;
+  margin: 0;
+  font-weight: 600;
+}
+
+.tea-category {
+  background-color: #e6f7e9;
+  color: #2e7d32;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Изображение */
+.tea-image-container {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tea-image {
+  max-width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Детали */
+.tea-details {
+  margin-bottom: 25px;
+}
+
+.detail-section {
+  margin-bottom: 25px;
+}
+
+.detail-section h3 {
+  color: #4a5568;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.tea-description {
+  line-height: 1.6;
+  color: #4a5568;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 4px solid #333;
+}
+
+/* Индикатор крепости */
+.strength-indicator {
+  display: flex;
+  gap: 8px;
+}
+
+.strength-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  transition: background-color 0.2s ease;
+}
+
+.strength-dot.active {
+  background-color: #333;
+}
+
+/* Цена */
+.price-section {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.tea-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+/* Мета-информация */
+.tea-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #718096;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 20px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .one-tea-container {
+    padding: 0 15px;
+  }
+  
+  .tea-card {
+    padding: 20px;
+  }
+  
+  .tea-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .tea-title {
+    font-size: 1.8rem;
+  }
+  
+  .tea-image {
+    height: 300px;
+  }
+  
+  .tea-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .header-nav {
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tea-image {
+    height: 250px;
+  }
+  
+  .tea-title {
+    font-size: 1.5rem;
+  }
+  
+  .header-nav {
+    justify-content: center;
+  }
+  
+  .btn {
+    flex: 1 0 45%;
+    max-width: none;
+    margin-bottom: 10px;
+  }
+}
