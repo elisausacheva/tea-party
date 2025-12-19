@@ -2,11 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import TeaApi from "../../entities/tea/api/TaeApi";
+import { TeaApi } from "../../entities/tea/TeaApi";
 import ModalEditTeaForm from "../../entities/tea/ui/ModalEditTeaForm"; // Предполагаем, что компонент существует
-import "./OneTeaPage.css"; // Добавим отдельный CSS файл для этой страницы
+// import "./OneTeaPage.css"; // Добавим отдельный CSS файл для этой страницы
+import { Container, Row, Col, Card, Button, Spinner, Badge } from "react-bootstrap";
+import { ArrowLeft, Edit, Trash2, MapPin, Leaf } from "lucide-react";
+import CommentsSection from "../../widgets/CommentsSection/CommentsSection";
 
-export default function OneTeaPage() {
+export default function OneTeaPage({user}) {
   const navigate = useNavigate();
   const [tea, setTea] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,8 +48,8 @@ export default function OneTeaPage() {
 
     try {
       const response = await TeaApi.delete(actualId);
-      if (response.status === 204) {
-        navigate("/teas");
+      if (response.statusCode === 200) {
+        navigate("/");
       }
     } catch (error) {
       console.error("Ошибка при удалении:", error);
@@ -76,120 +79,101 @@ export default function OneTeaPage() {
     getOneTea();
   }, [actualId]);
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p>Загружаем информацию о чае...</p>
-      </div>
-    );
-  }
+  if (loading) return (
+    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "60vh" }}>
+        <Spinner animation="border" style={{ color: "var(--color-primary)" }} />
+    </Container>
+  );
 
-  if (error || !tea) {
-    return (
-      <div className="error-container">
-        <h2>Ошибка</h2>
-        <p>{error || "Чай не найден"}</p>
-        <button className="btn" onClick={() => navigate(-1)}>
-          Вернуться назад
-        </button>
-      </div>
-    );
-  }
+  const isAdmin = user?.id && user.isAdmin;
 
-  return (
-    <div className="one-tea-container">
-      <ModalEditTeaForm
-        show={show}
-        setShow={setShow}
-        tea={tea}
-        updateHandler={updateHandler}
+return (
+    <Container className="py-5">
+      <Button 
+        variant="link" 
+        onClick={() => navigate(-1)} 
+        className="mb-4 text-decoration-none d-flex align-items-center gap-2"
+        style={{ color: "var(--color-secondary)" }}
+      >
+        <ArrowLeft size={20} /> Вернуться к списку
+      </Button>
+
+      <Card className="border-0 shadow-lg overflow-hidden mb-5" style={{ borderRadius: "20px" }}>
+        <Row className="g-0">
+          <Col md={6} className="bg-light d-flex align-items-center justify-content-center overflow-hidden" style={{ minHeight: "400px" }}>
+            {tea.img ? (
+               <img 
+                 src={tea.img} 
+                 alt={tea.name} 
+                 className="img-fluid w-100 h-100" 
+                 style={{ objectFit: "cover" }} 
+               />
+            ) : (
+               <div className="text-muted text-center p-5">
+                  <Leaf size={64} color="var(--color-secondary)" />
+                  <p className="mt-2">Нет фото</p>
+               </div>
+            )}
+          </Col>
+          <Col md={6}>
+            <Card.Body className="p-4 p-lg-5 d-flex flex-column h-100">
+              
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                 <div>
+                    <h1 className="fw-bold mb-2" style={{ color: "var(--color-primary)", fontFamily: "var(--font-heading)" }}>
+                        {tea.name}
+                    </h1>
+                    {tea.sort && (
+                        <Badge bg="light" text="dark" className="border">
+                            {tea.sort}
+                        </Badge>
+                    )}
+                 </div>
+                 
+                 {/* Кнопки действий (только для владельца) */}
+                 {isAdmin && (
+                     <div className="d-flex gap-2">
+                         <Button variant="outline-secondary" size="sm" onClick={() => setShow(true)}>
+                             <Edit size={18} />
+                         </Button>
+                         <Button variant="outline-danger" size="sm" onClick={deleteHandler}>
+                             <Trash2 size={18} />
+                         </Button>
+                     </div>
+                 )}
+              </div>
+
+              {tea.location && (
+                  <div className="d-flex align-items-center gap-2 mb-4 text-muted">
+                      <MapPin size={18} color="var(--color-accent)" />
+                      <span>{tea.location}</span>
+                  </div>
+              )}
+
+              <div className="mb-4 flex-grow-1">
+                  <h5 style={{ color: "var(--color-secondary)" }}>О чае</h5>
+                  <p className="lead" style={{ fontSize: "1.1rem", lineHeight: "1.6" }}>
+                      {tea.desc}
+                  </p>
+              </div>
+            </Card.Body>
+          </Col>
+        </Row>
+      </Card>
+
+      <Row className="justify-content-center">
+          <Col lg={10}>
+             <CommentsSection teaID={id} user={user} />
+          </Col>
+      </Row>
+
+      <ModalEditTeaForm 
+         show={show} 
+         setShow={setShow} 
+         tea={tea} 
+         updateHandler={updateHandler} 
       />
 
-      <div className="header-nav">
-        <button className="btn btn-secondary" onClick={() => navigate(-1)}>
-          Назад
-        </button>
-
-        <button className="btn" onClick={editHandler}>
-          Редактировать
-        </button>
-
-        <button className="btn btn-secondary" onClick={deleteHandler}>
-          Удалить
-        </button>
-      </div>
-
-      <div className="tea-card">
-        <div className="tea-header">
-          <h1 className="tea-title">{tea.name}</h1>
-          {tea.category && <span className="tea-category">{tea.category}</span>}
-        </div>
-
-        {tea.img && (
-          <div className="tea-image-container">
-            <img
-              src={tea.img}
-              alt={tea.name}
-              className="tea-image"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "/placeholder-tea.jpg";
-              }}
-            />
-          </div>
-        )}
-
-        <div className="tea-details">
-          <div className="detail-section">
-            <h3>Описание</h3>
-            <p className="tea-description">{tea.desc}</p>
-          </div>
-
-          {tea.origin && (
-            <div className="detail-section">
-              <h3>Происхождение</h3>
-              <p>{tea.origin}</p>
-            </div>
-          )}
-
-          {tea.strength && (
-            <div className="detail-section">
-              <h3>Крепость</h3>
-              <div className="strength-indicator">
-                {[...Array(5)].map((_, i) => (
-                  <span
-                    key={i}
-                    className={`strength-dot ${
-                      i < tea.strength ? "active" : ""
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {tea.price && (
-            <div className="detail-section price-section">
-              <h3>Цена</h3>
-              <p className="tea-price">{tea.price} ₽</p>
-            </div>
-          )}
-        </div>
-
-        <div className="tea-meta">
-          {tea.createdAt && (
-            <span>
-              Добавлен: {new Date(tea.createdAt).toLocaleDateString()}
-            </span>
-          )}
-          {tea.updatedAt && (
-            <span>
-              Обновлен: {new Date(tea.updatedAt).toLocaleDateString()}
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
+    </Container>
   );
 }

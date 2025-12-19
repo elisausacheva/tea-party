@@ -1,4 +1,4 @@
-import { CirclePlus, CircleX } from "lucide-react";
+import { CircleCheck, CirclePlus, CircleX } from "lucide-react";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
@@ -15,7 +15,7 @@ export default function ModalEditoneTeaForm({
     <>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
-          <Modal.Title>Изменение подарка</Modal.Title>
+          <Modal.Title>Изменение карточки чая</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={updateHandler}>
@@ -25,7 +25,7 @@ export default function ModalEditoneTeaForm({
                 type="text"
                 name="name"
                 placeholder="Название"
-                defaultValue={tea.title}
+                defaultValue={tea.name}
                 autoFocus
               />
             </Form.Group>
@@ -42,8 +42,8 @@ export default function ModalEditoneTeaForm({
               <Button onClick={() => setShow(false)}>
                 Отменить <CircleX />
               </Button>
-              <Button type="submit">
-                Сохранить <CirclePlus />
+              <Button type="submit" className="align-right">
+                Сохранить <CircleCheck />
               </Button>
             </ButtonGroup>
           </Form>

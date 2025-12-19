@@ -6,7 +6,8 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/esm/Button";
 import axiosInstance from "../../shared/lib/axiosInstance";
 import Loader from "../../shared/hocs/Loader/Loader";
-import TeaApi from "../../entities/tea/api/TaeApi";
+import { TeaApi } from "../../entities/tea/TeaApi";
+
 
 export default function TeasPage({ user }) {
   const [teas, setTeas] = useState([]);

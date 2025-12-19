@@ -1,6 +1,6 @@
 import React from "react";
 // import {useNavigate} from 'react-router'
-import { TeaApi } from "../../entities/post/TeaApi";
+import { TeaApi } from "../../entities/tea/TeaApi";
 import "./PostCard.css";
 import { useState } from "react";
 import PostFormUpdate from "../../widgets/PostFormUpdate/PostFormUpdate";

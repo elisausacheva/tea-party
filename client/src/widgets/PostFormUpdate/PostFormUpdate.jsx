@@ -1,5 +1,5 @@
 import React from "react";
-import { TeaApi } from "../../entities/post/TeaApi";
+import { TeaApi } from "../../entities/tea/TeaApi";
 import { useState } from "react";
 
 export default function PostFormUpdate({

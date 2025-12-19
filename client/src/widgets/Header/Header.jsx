@@ -3,7 +3,7 @@ import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router"; // Обрати внимание: react-router-dom обычно, но у тебя react-router
 import { UserApi } from "../../entities/user/UserApi";
 import { setAccessToken } from "../../shared/lib/axiosInstance";
-import { Coffee, LogIn, LogOut, User, Trash2 } from "lucide-react"; // Иконки
+import { Coffee, LogIn, LogOut, User, Trash2, Leaf } from "lucide-react"; // Иконки
 
 export default function Header({ user, setUser }) {
   const navigate = useNavigate();
@@ -48,24 +48,18 @@ export default function Header({ user, setUser }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          {/* <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/alletest" className="text-light">
               Юзеры
             </Nav.Link>
-          </Nav>
-            <Nav.Link as={NavLink} to="/teas" className="text-light">
-              Все чаи
-            </Nav.Link>
+          </Nav> */}
 
-          <Nav className="d-flex align-items-center gap-3">
+          <Nav className="ms-auto d-flex align-items-center gap-3">
+            <Nav.Link as={NavLink} to="/teas" className="text-accent">
+              <Leaf size={18} /> Все чаи
+            </Nav.Link>
             {user.email ? (
               <>
-                {/* Ссылки только для залогиненных */}
-                <Nav.Link as={NavLink} to="/post" className="text-accent">
-                  Мои посты
-                </Nav.Link>
-
-                {/* Выпадающее меню профиля */}
                 <Dropdown align="end">
                   <Dropdown.Toggle
                     variant="outline-light"

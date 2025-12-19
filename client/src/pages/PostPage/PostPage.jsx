@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import PostForm from "../../widgets/PostForm/PostForm";
 import PostCard from "../../widgets/PostCard/Postcard";
-import { TeaApi } from "../../entities/post/TeaApi";
+import { TeaApi } from "../../entities/tea/TeaApi";
 import WorldMap from "../../components/WorldMap/WorldMap";
 import "./PostPage.css";
 

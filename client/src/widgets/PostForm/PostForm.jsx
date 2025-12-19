@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState } from "react";
-import { TeaApi } from "../../entities/post/TeaApi";
+import { TeaApi } from "../../entities/tea/TeaApi";
 
 export default function PostForm({ onCreate, userId }) {
   const [inputs, setInputs] = useState({
