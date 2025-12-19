@@ -92,7 +92,7 @@ export default function Header({ user, setUser }) {
               </>
             ) : (
               /* Кнопки для гостей */
-              <div className="d-flex gap-2">
+              <div className="d-flex gap-3">
                 <NavLink to="/login">
                   <Button className="btn-gold text-white rounded-pill px-4">
                     <LogIn size={18} /> Войти

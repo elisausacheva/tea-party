@@ -3,9 +3,10 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { PostApi } from '../../entities/post/PostApi'
+import CommentsSection from "../../widgets/CommentsSection/CommentsSection";
 
 
-export default function OnePostPage() {
+export default function OnePostPage({ user }) {
 const navigate = useNavigate()
     const [post, setPost] = useState({})
     console.log('__________----', post);
@@ -34,6 +35,7 @@ const navigate = useNavigate()
         <div> Название: {post.title}</div>
         <div> Текст: {post.desc}</div>
         <div> Нравиться: {post.like}</div>
+        <CommentsSection teaID={id} user={user} />
       </>
     );
 }
