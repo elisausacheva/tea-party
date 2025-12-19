@@ -44,10 +44,10 @@ export default function SignUpForm({ setUser }) {
         setAccessToken(data.accessToken);
         setUser(data.user);
         setInputs(INITIAL_INPUTS_DATA);
-        navigate("/posts");
+        navigate("/teas");
       }
     } catch (error) {
-      console.log("+==++++======++=", error);
+      // console.log("+==++++======++=", error);
       alert(error.message);
     }
   };

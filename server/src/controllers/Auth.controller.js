@@ -28,7 +28,7 @@ static async refreshTokens(req, res) {
         "=============AuthController.refreshTokens=============",
         message
     );
-    res
+    return res
         .status(401)
         .json(formatResponse(401, "Invalid refreshToken", null, message));
     }
@@ -43,7 +43,7 @@ static async register(req, res) {
         password,
     });
     if (!isValid) {
-        res
+        return res
         .status(400)
         .json(formatResponse(400, "Валидация не прошла", null, error));
     } else {
@@ -53,7 +53,7 @@ static async register(req, res) {
 
         const userFound = await UserService.getByEmail(normalizedEmail);
         if (userFound) {
-        res
+        return res
             .status(400)
             .json(
             formatResponse(
@@ -75,7 +75,7 @@ static async register(req, res) {
           // ! Заталкивай user в generateToken через объект
         const { accessToken, refreshToken } = generateToken({ user });
 
-        res
+        return res
             .status(200)
             .cookie("refreshTokenWhales", refreshToken, cookieConfig.refresh)
             .json(
@@ -88,10 +88,10 @@ static async register(req, res) {
     }
     } catch (error) {
     console.log(error);
-    res
+    return res
         .status(500)
         .json(
-        formatResponse(500, "Не удалось создать пользователя", error.message)
+        formatResponse(500, "Не удалось создать пользователя", null, error.message)
         );
     }
 }
@@ -120,7 +120,7 @@ static async logIn(req, res) {
     const userFound = await UserService.getByEmail(normalizedEmail);
 
     if (!userFound) {
-        res
+        return res
         .status(400)
         .json(
             formatResponse(
@@ -153,13 +153,13 @@ static async logIn(req, res) {
 
     return res
         .status(200)
-        .cookie("refreshTokenWhales", refreshToken, cookieConfig)
+        .cookie("refreshTokenWhales", refreshToken, cookieConfig.refresh)
         .json(
         formatResponse(200, "Успешный вход", { user: userFound, accessToken })
         );
     } catch ({ message }) {
     console.log(message);
-    res
+    return res
         .status(500)
         .json(formatResponse(500, "Внутренняя ошибка сервера", null, message));
     }
@@ -172,7 +172,7 @@ static logOut(req, res) {
         .json(formatResponse(200, "Успешно вышли"));
     } catch ({ message }) {
     console.log("=============UserController.signOut=============", message);
-    res
+    return res
         .status(500)
         .json(formatResponse(500, "Внутренняя ошибка сервера", null, message));
     }
