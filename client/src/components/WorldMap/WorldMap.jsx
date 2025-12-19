@@ -124,7 +124,6 @@ export default function WorldMap({ teas = [] }) {
       attributionControl={false}
       center={[30, 110]} // Center on China
       zoom={2}
-      scrollWheelZoom={false}
       style={{ height: "400px", width: "100%" }}
     >
       <TileLayer
